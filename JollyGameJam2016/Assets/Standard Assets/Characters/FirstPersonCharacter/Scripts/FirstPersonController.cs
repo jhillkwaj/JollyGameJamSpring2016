@@ -45,6 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float soundTime = 1f;
         public bool infiniteJump = true;
         private float lastIn = 0;
+        public bool crouch = false;
 
 
         // Use this for initialization
@@ -128,6 +129,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_Jumping = true;
                 this.transform.position += new Vector3(0, .2f, 0);
             }
+
+            
 
             if (m_CharacterController.isGrounded)
             {
@@ -221,6 +224,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void GetInput(out float speed)
         {
+            if(Input.GetKeyDown(KeyCode.C)) {
+                this.transform.position -= new Vector3(0, 2, 0);
+
+            } else if(Input.GetKeyUp(KeyCode.C))
+            {
+                this.transform.position += new Vector3(0, 2, 0);
+            }
+
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
