@@ -42,6 +42,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        private float soundTime = 1f;
+
         // Use this for initialization
         private void Start()
         {
@@ -65,7 +67,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
-                m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+                m_Jump = CrossPlatformInputManager.GetButton("Jump");
             }
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
@@ -108,6 +110,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
+            Debug.Log(m_Jump);
+            soundTime -= Time.fixedDeltaTime;
+            if (m_Jump)
+            {
+                m_MoveDir.y = m_JumpSpeed;
+                
+                if(soundTime < 0)
+                {
+                    PlayJumpSound();
+                    soundTime = 1;
+                }
+                m_Jump = false;
+                m_Jumping = true;
+                this.transform.position += new Vector3(0, .2f, 0);
+            }
 
             if (m_CharacterController.isGrounded)
             {
