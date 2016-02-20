@@ -70,10 +70,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
             // the jump state needs to read here to make sure it is not missed
-            if (!m_Jump)
-            {
-                m_Jump = CrossPlatformInputManager.GetButton("Jump");
-            }
+
+            m_Jump = CrossPlatformInputManager.GetButton("Jump");
+
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
@@ -117,6 +116,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             Debug.Log(m_Jump);
             soundTime -= Time.fixedDeltaTime;
+
             if (m_Jump && infiniteJump)
             {
                 m_MoveDir.y = m_JumpSpeed;
