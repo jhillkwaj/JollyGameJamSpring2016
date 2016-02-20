@@ -46,6 +46,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool infiniteJump = true;
         private float lastIn = 0;
         public bool crouch = false;
+        public bool flipControls = false;
 
 
         // Use this for initialization
@@ -235,6 +236,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
+
+            if(flipControls)
+            { vertical = -1 * vertical; }
 
             bool waswalking = m_IsWalking;
 

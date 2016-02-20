@@ -188,11 +188,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11417438, guid: f89cd2d5076aa4446b60d691300b7ad5, type: 2}
       propertyPath: infiniteJump
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 199706, guid: f89cd2d5076aa4446b60d691300b7ad5, type: 2}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 11417438, guid: f89cd2d5076aa4446b60d691300b7ad5, type: 2}
+      propertyPath: flipControls
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f89cd2d5076aa4446b60d691300b7ad5, type: 2}
