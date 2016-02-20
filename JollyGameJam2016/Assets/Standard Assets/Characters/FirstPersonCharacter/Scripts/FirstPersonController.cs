@@ -233,6 +233,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 this.transform.position += new Vector3(0, 2, 0);
             }
 
+            if (Input.GetKeyDown(KeyCode.R))
+            { Application.LoadLevel(Application.loadedLevel); }
+
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
