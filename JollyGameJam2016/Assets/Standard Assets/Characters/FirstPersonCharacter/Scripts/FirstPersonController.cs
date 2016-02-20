@@ -43,6 +43,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private AudioSource m_AudioSource;
 
         private float soundTime = 1f;
+        public bool infiniteJump = true;
+        private float lastIn = 0;
+
 
         // Use this for initialization
         private void Start()
@@ -112,7 +115,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             Debug.Log(m_Jump);
             soundTime -= Time.fixedDeltaTime;
-            if (m_Jump)
+            if (m_Jump && infiniteJump)
             {
                 m_MoveDir.y = m_JumpSpeed;
                 
@@ -223,6 +226,25 @@ namespace UnityStandardAssets.Characters.FirstPerson
             float vertical = CrossPlatformInputManager.GetAxis("Vertical");
 
             bool waswalking = m_IsWalking;
+
+            if (vertical < 0 && lastIn >= 0)
+            {
+                GameObject[] objs = GameObject.FindGameObjectsWithTag("BackUp");
+                foreach (GameObject g in objs)
+                {
+                    g.GetComponent<Collider>().enabled = false;
+                }
+                
+            }
+            else if (vertical > 0 && lastIn <= 0)
+            {
+                GameObject[] objs = GameObject.FindGameObjectsWithTag("BackUp");
+                foreach (GameObject g in objs)
+                {
+                    g.GetComponent<Collider>().enabled = true;
+                }
+            }
+            lastIn = vertical;
 
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
