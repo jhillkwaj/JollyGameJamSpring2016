@@ -5,7 +5,7 @@ public class Next_Level : MonoBehaviour {
     public bool alt = false;
     void OnTriggerEnter(Collider other)
     {
-        if(!alt)
+		if(!alt && other.tag == "Player")
             Application.LoadLevel(Application.loadedLevel + 1);
         else if(other.tag == "Player")
         {
