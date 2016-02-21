@@ -6,7 +6,7 @@ public class DoNotDestroy : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject.DontDestroyOnLoad (this.gameObject);
-		Application.LoadLevel ("Level1");
+		//Application.LoadLevel ("Level1");
 
 	
 	}
