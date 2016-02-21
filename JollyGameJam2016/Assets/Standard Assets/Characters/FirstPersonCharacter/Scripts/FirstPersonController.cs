@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float soundTime = 1f;
         public bool infiniteJump = true;
         private float lastIn = 0;
-        public bool crouch = false;
+        private bool crouch = false;
         public bool flipControls = false;
 
 
