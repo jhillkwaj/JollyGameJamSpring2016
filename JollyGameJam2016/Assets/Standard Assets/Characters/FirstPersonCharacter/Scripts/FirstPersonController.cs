@@ -47,11 +47,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float lastIn = 0;
         private bool crouch = false;
         public bool flipControls = false;
+        private Vector3 resetPos;
+        public bool reset = false;
+
 
 
         // Use this for initialization
         private void Start()
         {
+            Cursor.visible = false;
+            resetPos = this.transform.position;
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -225,16 +230,26 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void GetInput(out float speed)
         {
-            if(Input.GetKeyDown(KeyCode.C)) {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            { Cursor.visible = !Cursor.visible; }
+           if (Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl)) {
                 this.transform.position -= new Vector3(0, 2, 0);
 
-            } else if(Input.GetKeyUp(KeyCode.C))
+            } else if(Input.GetKeyUp(KeyCode.C) || Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.RightControl))
             {
                 this.transform.position += new Vector3(0, 2, 0);
             }
 
             if (Input.GetKeyDown(KeyCode.R))
-            { Application.LoadLevel(Application.loadedLevel); }
+            {
+                if (!reset)
+                { Application.LoadLevel(Application.loadedLevel); }
+                else
+                {
+                    this.transform.position = resetPos;
+
+                }
+            }
 
             // Read input
             float horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
